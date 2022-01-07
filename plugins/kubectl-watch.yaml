@@ -1,0 +1,24 @@
+apiVersion: krew.googlecontainertools.github.com/v1alpha2
+kind: Plugin
+metadata:
+  name: watch
+spec:
+  homepage: https://github.com/davidcollom/kubectl-watch
+  shortDescription: Watch kubectl commands via watch
+  version: v0.0.1
+  description: |
+    Provides a way to easily/simply pass kubectl commands via watch
+  platforms:
+  - selector:
+      matchExpressions:
+      - key: os
+        operator: In
+        values:
+        - darwin
+        - linux
+    uri: https://github.com/davidcollom/kubectl-watch/releases/download/v0.0.1/release.zip
+    sha256: 6e7557c634903df09e505703e9a0b97a19256fd07e8003e9a80169420f4e0eaa
+    bin: kubectl-watch
+    files:
+    - from: kubectl-watch
+      to: .
