@@ -1,0 +1,24 @@
+apiVersion: krew.googlecontainertools.github.com/v1alpha2
+kind: Plugin
+metadata:
+  name: tail
+spec:
+  homepage: https://github.com/davidcollom/kubectl-tail
+  shortDescription: Tail pod logs
+  version: v0.0.1
+  description: |
+    Provides a way to easily tail pod logs using stern
+  platforms:
+    - selector:
+        matchExpressions:
+          - key: os
+            operator: In
+            values:
+              - darwin
+              - linux
+      uri: https://github.com/davidcollom/kubectl-tail/releases/download/v0.0.1/release.zip
+      sha256: 48b85b0e381fe414496d8a1a903f45a5e1cc7bad9200a51986ebaf4300867a39
+      bin: kubectl-tail
+      files:
+        - from: kubectl-tail
+          to: .
