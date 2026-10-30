@@ -26,8 +26,9 @@ kubectl krew install davidcollom/watch
 The `davidcollom/` prefix is required — plugins from a custom index have to be referenced with their
 index name, so a bare `kubectl krew install tail` would be resolved against the default index instead.
 
-This installs the `kubectl-tail` and `kubectl-watch` binaries, which `kubectl` exposes as the
-`kubectl tail` and `kubectl watch` subcommands.
+This installs the `kubectl-tail` and `kubectl-watch` wrapper scripts, which `kubectl` exposes as the
+`kubectl tail` and `kubectl watch` subcommands. Both are bash scripts that shell out to `stern` and
+`watch` respectively, so those have to be installed separately.
 
 To browse everything in the index:
 
@@ -45,9 +46,9 @@ plugins/
 └── watch.yaml   # kubectl-watch
 ```
 
-The manifests follow the [krew plugin spec](https://krew.sigs.k8s.io/docs/user/plugins/), with each
-one declaring the platform selector, the release `uri`, its `sha256` checksum and the binary to
-install:
+The manifests follow the [krew plugin manifest format](https://krew.sigs.k8s.io/docs/developer-guide/plugin-manifest/),
+with each one declaring the platform selector, the release `uri`, its `sha256` checksum, the binary
+to install and the files to extract from the archive. `plugins/tail.yaml` in full:
 
 ```yaml
 apiVersion: krew.googlecontainertools.github.com/v1alpha2
@@ -58,6 +59,8 @@ spec:
   homepage: https://github.com/davidcollom/kubectl-tail
   shortDescription: Tail pod logs
   version: v0.0.1
+  description: |
+    Provides a simple way to easily tail pod logs using stern
   platforms:
     - selector:
         matchExpressions:
@@ -69,6 +72,9 @@ spec:
       uri: https://github.com/davidcollom/kubectl-tail/releases/download/v0.0.1/release.zip
       sha256: 48b85b0e381fe414496d8a1a903f45a5e1cc7bad9200a51986ebaf4300867a39
       bin: kubectl-tail
+      files:
+        - from: kubectl-tail
+          to: .
 ```
 
 ## Updating a plugin
