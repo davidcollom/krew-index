@@ -10,8 +10,8 @@ install`.
 
 | Plugin | Description | Source |
 | ------ | ----------- | ------ |
-| `kubectl-tail` | Tail pod logs using [stern](https://github.com/stern/stern). | [davidcollom/kubectl-tail](https://github.com/davidcollom/kubectl-tail) |
-| `kubectl-watch` | Pass `kubectl` commands through [watch](https://github.com/sqweek/watch). | [davidcollom/kubectl-watch](https://github.com/davidcollom/kubectl-watch) |
+| `tail` | Tail pod logs using [stern](https://github.com/stern/stern). | [davidcollom/kubectl-tail](https://github.com/davidcollom/kubectl-tail) |
+| `watch` | Pass `kubectl` commands through [watch](https://github.com/sqweek/watch). | [davidcollom/kubectl-watch](https://github.com/davidcollom/kubectl-watch) |
 
 ## Usage
 
@@ -19,9 +19,12 @@ Add this index to your krew configuration and install a plugin:
 
 ```bash
 kubectl krew index add davidcollom https://github.com/davidcollom/krew-index
-kubectl krew install kubectl-tail
-kubectl krew install kubectl-watch
+kubectl krew install tail
+kubectl krew install watch
 ```
+
+This installs the `kubectl-tail` and `kubectl-watch` binaries, which `kubectl` exposes as the
+`kubectl tail` and `kubectl watch` subcommands.
 
 To browse everything in the index:
 
