@@ -11,7 +11,7 @@ install`.
 | Plugin | Description | Source |
 | ------ | ----------- | ------ |
 | `tail` | Tail pod logs using [stern](https://github.com/stern/stern). | [davidcollom/kubectl-tail](https://github.com/davidcollom/kubectl-tail) |
-| `watch` | Pass `kubectl` commands through [watch](https://github.com/sqweek/watch). | [davidcollom/kubectl-watch](https://github.com/davidcollom/kubectl-watch) |
+| `watch` | Pass `kubectl` commands through [watch](https://man7.org/linux/man-pages/man1/watch.1.html). | [davidcollom/kubectl-watch](https://github.com/davidcollom/kubectl-watch) |
 
 ## Usage
 
@@ -19,9 +19,12 @@ Add this index to your krew configuration and install a plugin:
 
 ```bash
 kubectl krew index add davidcollom https://github.com/davidcollom/krew-index
-kubectl krew install tail
-kubectl krew install watch
+kubectl krew install davidcollom/tail
+kubectl krew install davidcollom/watch
 ```
+
+The `davidcollom/` prefix is required — plugins from a custom index have to be referenced with their
+index name, so a bare `kubectl krew install tail` would be resolved against the default index instead.
 
 This installs the `kubectl-tail` and `kubectl-watch` binaries, which `kubectl` exposes as the
 `kubectl tail` and `kubectl watch` subcommands.
@@ -81,4 +84,4 @@ When a plugin has a new release:
 
 ## License
 
-See the repository for licensing details.
+No licence file is included in this repository.
